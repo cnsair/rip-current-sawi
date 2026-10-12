@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-evaluate_ripaid_tiled.py
-========================
 Replacement for evaluate_ripaid.py. Same metrics, corrected geometry.
 
 Why the whole-frame version was wrong

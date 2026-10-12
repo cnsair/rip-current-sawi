@@ -1,6 +1,4 @@
 """
-evaluate_test_set.py
-
 Universal batch evaluation over the RipVIS test partition (4,349 images).
 Supports three model families via --family argument:
   smp        : all smp architectures (UNet, UNet++, MAnet, Attention UNet,

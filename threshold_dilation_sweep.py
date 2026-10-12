@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-threshold_dilation_sweep.py
-===========================
 Answers reviewer comment 5: is the Recall gain of SAWI simply a more aggressive
 output distribution, reproducible from the anchor by rethresholding, recalibrating
 or dilating?

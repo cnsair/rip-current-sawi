@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-audit_near_duplicates.py
-========================
 Test whether the RipDetSeg image-level 80/20 split leaks near-duplicate
 images between the training and validation partitions.
 

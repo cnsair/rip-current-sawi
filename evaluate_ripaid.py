@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-evaluate_ripaid.py
-==================
 One-time evaluation on RipAID (Soriano-González et al., 2025, Zenodo
 10.5281/zenodo.15082427), the independently curated corpus used to answer
 reviewer comment 3.

@@ -16,7 +16,11 @@ author:
 
 # Welcome to the official SAWI Repository
 
-SAWI is a weight-space stabilisation method implemented through a five-stage algorithm that leaves the deployed network unchanged. It is designed to address two coupled behaviours established experimentally in Section IV: continued fine-tuning can reduce cross-dataset sensitivity through source-domain specialisation, and the resulting sensitivity can vary across optimisation trajectories even when the nominal training configuration is unchanged. SAWI therefore replaces dependence on a single terminal checkpoint with a dense average of the fine-tuning trajectory, then interpolates this averaged solution toward the early-stopped task-adaptation checkpoint. BatchNorm statistics are re-estimated after averaging and interpolation, and the deployed operating points are selected using validation data alone. The final model remains a standard SegFormer-B2 with no additional modules, parameters, or inference-time computation.
+Rip currents are hazardous nearshore flows characterised by narrow seaward jets and variable visual signatures. Their boundaries are diffuse, with gradual changes in foam, turbulence, and water appearance, making rip-current extent difficult to delineate consistently across datasets. 
+
+SAWI is a weight-space stabilisation method implemented through a five-stage algorithm that leaves the deployed network unchanged. It is designed to address two coupled behaviours established experimentally: continued fine-tuning can reduce cross-dataset sensitivity through source-domain specialisation, and the resulting sensitivity can vary across optimisation trajectories even when the nominal training configuration is unchanged. SAWI therefore replaces dependence on a single terminal checkpoint with a dense average of the fine-tuning trajectory, then interpolates this averaged solution toward the early-stopped task-adaptation checkpoint. BatchNorm statistics are re-estimated after averaging and interpolation, and the deployed operating points are selected using validation data alone. The final model remains a standard SegFormer-B2 with no additional modules, parameters, or inference-time computation. 
+
+These results identify unstable spatial delineation under dataset shift as a source of uncertainty in vision-based rip-current monitoring and show that weight-space stabilisation can substantially improve reproducibility of cross-dataset sensitivity across fine-tuning runs without modifying the deployed network or increasing inference cost.
 
 # Datasets 
 

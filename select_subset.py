@@ -1,6 +1,4 @@
 """
-select_subset.py
-================
 Selects a balanced, representative subset of images for manual relabelling.
 
 Strategy:

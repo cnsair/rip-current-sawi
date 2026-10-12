@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-evaluate_event_level.py
-=======================
 Detection-oriented evaluation requested by reviewer comment 6: pixel Recall
 alone does not distinguish "covered part of the rip" from "missed the rip".
 

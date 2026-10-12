@@ -1,6 +1,4 @@
 """
-wise_ft_interpolate.py
-======================
 Design A, step 1 — WiSE-FT weight-space interpolation (Wortsman et al.,
 CVPR 2022) between the two checkpoints you already have:
 

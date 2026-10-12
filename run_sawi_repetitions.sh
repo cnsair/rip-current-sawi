@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# run_sawi_repetitions.sh
 # ---------------------------------------------------------------------------
 # Runs the full per-seed SAWI pipeline for the remaining repetitions required
 # by reviewer comment 1 (five independent runs, before and after SAWI).

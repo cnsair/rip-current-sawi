@@ -1,6 +1,4 @@
 """
-parity_check.py
-===============
 Run ONCE before training the dual-branch model (Step 5 of the guide).
 
 Verifies three things:

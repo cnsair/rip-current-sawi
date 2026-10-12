@@ -83,9 +83,8 @@ from sklearn.metrics import fbeta_score as sklearn_fbeta
 
 # CHANGE: GPU is now the default; falls back to CPU if no CUDA device is found.
 # The original script hardcoded DEVICE = "cpu".
-DEVICE    = "gpu"
-
-IMG_SIZE  = 256       # must match the size used during training
+DEVICE    = "cpu"
+IMG_SIZE  = 512       # must match the size used during training
 THRESHOLD = 0.5       # sigmoid threshold for binary prediction
 MIN_AREA  = 500       # minimum rip blob area in pixels (removes noise)
 
@@ -117,7 +116,7 @@ MODEL_FAMILY = "segformer"
 #   "manet"          -> Multi-scale Attention Net (Attention Residual):
 #                       PAB global spatial attention + MFAB multi-scale
 #                       channel attention.  Use with resnet50 backbone.
-BACKBONE        = "resnet34"  # smp encoder name (e.g. "resnet34", "efficientnet-b2", "tu-convnext_tiny")
+BACKBONE        = "resnet50"  # smp encoder name (e.g. "resnet34", "efficientnet-b2", "tu-convnext_tiny")
 ARCHITECTURE    = "unet"
 ENCODER_WEIGHTS = "imagenet"   # None at inference -- weights come from checkpoint
 
@@ -639,10 +638,17 @@ def load_model(checkpoint_path: str, device: str = DEVICE):
     checkpoint = torch.load(checkpoint_path, map_location=device, weights_only=False)
 
     # -- Extract state dict ---------------------------------------------------
+    # CHANGE C: record the training resolution so the dual-branch wrapper can
+    # be built at the size the checkpoint was trained at.
+    ckpt_img_size = None
+
     if isinstance(checkpoint, dict):
         if "model_state" in checkpoint:
             state_dict = checkpoint["model_state"]
             cfg = checkpoint.get("config", {})
+            _cs = cfg.get("img_size")
+            if isinstance(_cs, int):
+                ckpt_img_size = _cs
             print(f"  Checkpoint info:")
             print(f"    Epoch          : {checkpoint.get('epoch', 'unknown')}")
             print(f"    Best val IoU   : {checkpoint.get('val_iou', 0.0):.4f}")
@@ -682,7 +688,28 @@ def load_model(checkpoint_path: str, device: str = DEVICE):
                 "This checkpoint requires dual_branch_segformer.py, which could "
                 "not be imported. Place it alongside detect_rip.py."
             )
-        model = DualBranchSegFormer(model, output_size=IMG_SIZE).to(device)
+        # CHANGE A: DualBranchSegFormer reads hf_model.config.decoder_hidden_size,
+        # so it needs the raw HuggingFace SegformerForSemanticSegmentation, not
+        # our SegFormerWrapper (which has no .config). build_segformer() returns
+        # SegFormerWrapper(hf_model, ...), so unwrap before passing it on.
+        hf_inner = getattr(model, "model", None)
+        if hf_inner is None or not hasattr(hf_inner, "config"):
+            raise AttributeError(
+                "Expected SegFormerWrapper.model to hold the HuggingFace "
+                "SegformerForSemanticSegmentation; attribute not found. "
+                "Check the attribute name in SegFormerWrapper.__init__."
+            )
+        # CHANGE B: train_segformer_dual_branch.py constructs the model with
+        # output_size=(IMG_SIZE, IMG_SIZE); a bare int is not the same argument.
+        # CHANGE C: use the resolution recorded in the checkpoint rather than the
+        # module-level IMG_SIZE, so a model trained at 512 is not run at 256.
+        dual_size = ckpt_img_size if ckpt_img_size else IMG_SIZE
+        if ckpt_img_size and ckpt_img_size != IMG_SIZE:
+            print(f"  Note           : checkpoint was trained at {ckpt_img_size}; "
+                  f"overriding IMG_SIZE={IMG_SIZE} for this model.")
+        model = DualBranchSegFormer(
+            hf_inner, output_size=(dual_size, dual_size)
+        ).to(device)
         print("  Architecture   : dual-branch (detail path + gated fusion detected)")
 
     model.load_state_dict(state_dict)

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# run_determinism_check.sh
 # ---------------------------------------------------------------------------
 # Runs the two bf16 determinism-check training arms sequentially (seed=42,
 # seed=43). Aborts before run B if run A fails, so a broken run A never wastes

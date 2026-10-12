@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-compute_val_loss.py
-===================
 Computes the validation loss of every per-epoch checkpoint of a run, writing a
 CSV trace that build_weight_baselines.py consumes to select the SWAD averaging
 window (t_s, t_e).

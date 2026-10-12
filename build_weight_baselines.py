@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-build_weight_baselines.py
-=========================
 Constructs the weight-averaging baselines requested by reviewer comment 8 from
 the per-epoch checkpoints of a single run. CPU only, no training.
 

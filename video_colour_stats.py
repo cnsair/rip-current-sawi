@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-video_colour_stats.py
-=====================
 Quantifies the colour of the water in each transfer-partition video, so that a
 visual impression ("the undetected sequences look bluish-green") can be tested
 against the detection outcome rather than asserted.

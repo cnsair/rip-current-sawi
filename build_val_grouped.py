@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 """
------------------------
 Construct a GROUP-DISJOINT validation subset for RipDetSeg.
 
 Supersedes build_val_grouped.py. Changes from v1, and why:

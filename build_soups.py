@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-build_soups.py
-==============
 Model soups (Wortsman et al., ICML 2022) across the five independent runs.
 
   uniform    Mean of all supplied endpoint checkpoints.

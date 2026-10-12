@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 """
-reconcile_hashes.py
--------------------
 Identify which dhash/phash convention reproduces the original near-duplicate
 audit, so that one hash definition can be used consistently throughout the paper.
 

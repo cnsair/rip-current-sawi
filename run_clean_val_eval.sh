@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# run_clean_val_eval.sh
 # ---------------------------------------------------------------------------
 # Re-runs validation-dependent selection on the deduplicated subsets, to answer
 # reviewer comment 4. Inference only — no retraining, no checkpoint regeneration.

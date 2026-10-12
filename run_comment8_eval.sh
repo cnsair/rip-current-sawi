@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# run_comment8_eval.sh
 # ---------------------------------------------------------------------------
 # Evaluates the weight-averaging baselines of reviewer comment 8 on the RipVIS
 # transfer partition: 4 baselines x 5 seeds + the uniform soup = 21 runs.
