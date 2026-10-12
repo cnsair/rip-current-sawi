@@ -43,7 +43,7 @@ MiT
 4. No full-dataset hosting or mirroring without permission  
 
 ## Current Version
-Current version of RipVIS is 1.0.0.
+Current version of SAWI is 1.0.0.
 
 
 
