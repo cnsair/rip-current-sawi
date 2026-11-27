@@ -22,6 +22,7 @@ results/*
 modality_labelling/*
 results_val/
 qualitative_results/
+reviewer_interpolation/
 
 # But do not ignore the .gitkeep files inside them
 !data/.gitkeep
